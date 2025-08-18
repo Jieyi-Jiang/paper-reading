@@ -1,7 +1,3 @@
----
-
----
-
 # [Nature 2025] Controlling diverse robots by inferring Jacobian fields with deep networks
 
 > Paper: [Controlling diverse robots by inferring Jacobian fields with deep networks](https://www.nature.com/articles/s41586-025-09170-0.pdf)
@@ -106,17 +102,11 @@
 
 2. 还是不够泛化，只能根据不同的机器人训练不同的  Visuomotor Jacobian Field 。模型本质上并不具备**理解物理世界**的能力，如果需要更加泛化的**机器**，需要训练出一个能真正理解物理世界的模型。
 
-
-
-
-
 两个重要组成部分：
 
 1. 状态预测模型（state-estimation model）：从单视频流中，推理出机器人的3D表示，通过对机器人的3D几何和微分运动学进行编码（每个3D的点在任意可能的指令下，将如何运动）。
 
 2. 逆动力学控制（inverse dynamics controller）：在2D图片空间或3D空间以**交互速度**对期望的机器人运动进行**密集参数化**。
-
-
 
 主要的公式：
 
