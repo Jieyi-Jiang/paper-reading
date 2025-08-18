@@ -6,4 +6,4 @@
 
 ## Fundamental
 
-[Controlling diverse robots by inferring Jacobian fields with deep networks](./fundamental/[Nature 2025] Controlling diverse robots by inferring  Jacobian fields with deep networks.md)
+[Controlling diverse robots by inferring Jacobian fields with deep networks](.%2Ffundamental%2F%5BNature%202025%5D%20Controlling%20diverse%20robots%20by%20inferring%20%20Jacobian%20fields%20with%20deep%20networks.md)
