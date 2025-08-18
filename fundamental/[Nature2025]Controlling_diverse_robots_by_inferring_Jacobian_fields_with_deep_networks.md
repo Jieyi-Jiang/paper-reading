@@ -1,6 +1,34 @@
+---
+
+---
+
 # [Nature 2025] Controlling diverse robots by inferring Jacobian fields with deep networks
 
 > Paper: [Controlling diverse robots by inferring Jacobian fields with deep networks](https://www.nature.com/articles/s41586-025-09170-0.pdf)
+
+## 总结
+
+1. 用到的关键技术点和基础理论
+   
+   1. Radiance Fields 
+
+2. 这个方法诞生的必要条件
+   
+   1. 机器学习
+   2. 算力（半导体，计算机）
+   3. 图像处理
+
+3. 之前为什么没有人想到这个方法
+
+4. 启发
+   
+   - 无监督学习和有监督学习
+     
+     想要进行大规模、长时间的持续训练，肯定是要用到无监督的方法的，纯有监督的方法已经过时了。有监督学习可以作为一种调优的手段。
+   
+   - 无监督学习和强化学习
+     
+     这两个结合有希望碰撞出火花，但是应该怎么结合呢？  
 
 ## Introduction
 
@@ -52,6 +80,58 @@
    
    - 问题：高度依赖于特定系统的简化假设，不能普遍的推广使用
 
-6. 之前的工作：有人利用过机器学习和基于标记的视觉伺服（marker-based visual servoing ）方法
+6. 之前的工作：
    
-   - 问题：应用到某个特定的机器人架构上时，需要大量的专家指导
+   1. 有人利用过机器学习和基于标记的视觉伺服（marker-based visual servoing ）方法
+      
+      - 问题1：应用到某个特定的机器人架构上时，需要大量的专家指导。
+      
+      - 问题2：高精度运动捕捉系统（High-Precision Motion-Capture System），昂贵、笨重需要可控的使用环境。
+   
+   2. 机器人形态学的神经网络场景表达
+      
+      - 问题1：依赖于一些高精度的嵌入式传感器，但是难以在仿生和软体机器人中安装此类传感器。
+      
+      - 问题2：依赖于3D动作捕捉实现高精度控制。
+
+7. 总结：我们需要的是一种通用的控制方法，这种方法不依赖于机器人系统装配工艺、执行器（驱动方式）、嵌入式传感器、材料和形态。
+
+### 4 本文提出的新方法（Visuomotor Jacobian Field）
+
+## Visuomotor Jacobian Field - 视觉-运动雅可比场
+
+#### 我的思考
+
+1. 如果从传统的机器人的角度来看的话。传统的机器人是在关节空间 $\\bm{q}$ 下进行规划，而本文则是越过关节空间，通过神经网络和纯视觉的方法直接在笛卡尔空间 $\bm{x}$ 下进行规划。如果这里的 **2D图片空间** 和 **3D空间** 可以视作 **笛卡尔空间**的话
+
+2. 还是不够泛化，只能根据不同的机器人训练不同的  Visuomotor Jacobian Field 。模型本质上并不具备**理解物理世界**的能力，如果需要更加泛化的**机器**，需要训练出一个能真正理解物理世界的模型。
+
+
+
+
+
+两个重要组成部分：
+
+1. 状态预测模型（state-estimation model）：从单视频流中，推理出机器人的3D表示，通过对机器人的3D几何和微分运动学进行编码（每个3D的点在任意可能的指令下，将如何运动）。
+
+2. 逆动力学控制（inverse dynamics controller）：在2D图片空间或3D空间以**交互速度**对期望的机器人运动进行**密集参数化**。
+
+
+
+主要的公式：
+
+## 相关名词
+
+inverse dynamics controller - 逆动力学控制
+
+neural radiance field - 神经网络辐射场
+
+differential kinematics - 微分运动学
+
+case-by-case basis - “一事一议”原则
+
+visuomotor Jacobian Field - 视觉-运动雅可比场，体现了视觉的点和机器人关节运动之间的雅可比（微分）关系的场
+
+linearity and spatial locality inductive biases - 线性归纳偏置和时间局部归纳偏置
+
+unseen robot configuration - 未见机器人构型，configuration在这里不是配置的意思，而是构型的意思，指的是机器人的形态。未见机器人构型应该是训练中没有见到的样例，对 unseen robot configuration 的预测精度体现了模型的泛化能力。
