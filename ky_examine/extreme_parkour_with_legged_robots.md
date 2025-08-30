@@ -37,7 +37,8 @@ Hardware: Unitree A1, >= 10k USD, >= 80K RMB; low-cost?
 ## Benchmark
 
 1. compare with other works
-![img1](./resources/image.png)
+
+    ![img1](./resources/image.png)
 
 
 ## Challenges
