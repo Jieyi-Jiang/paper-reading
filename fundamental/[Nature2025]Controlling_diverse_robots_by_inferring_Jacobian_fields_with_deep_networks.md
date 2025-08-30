@@ -6,7 +6,19 @@
 
 1. 用到的关键技术点和基础理论
    
-   1. Radiance Fields 
+   1. Neural Radiance Fields 神经辐射场 (3D reconstruction)  -> NeRF
+   
+   2. Self-supervised learning method 
+   
+   3. optical flow and point-tracking methods
+      
+      跟踪机器人的运动，作为训练的参考数据（真实数据）
+   
+   4. **volume** rendering 体渲染  (3D reconstruction) -> NeRF
+      
+      让单目相机具有3D感知的能力
+   
+   5. Differentiable rendering 可微分渲染
 
 2. 这个方法诞生的必要条件
    
@@ -25,6 +37,16 @@
    - 无监督学习和强化学习
      
      这两个结合有希望碰撞出火花，但是应该怎么结合呢？  
+   
+   - 从本质上来说，这是一个机器人 **自学习** 的过程
+     
+     1. 关节指令随机采样 - 尝试控制机器人的躯体
+     
+     2. 使用相机拍摄关节的运动，观察/感受躯体的运动
+     
+     3. 无监督训练。控制身体，观察身体运动，并从中学习出怎么样控制身体去完成期望的运动动作。
+     
+     4. 类似于婴儿学习走路，不断试错，不断观察，不断学习。非常棒的思路，非常的仿生。
 
 ## Introduction
 
@@ -125,3 +147,7 @@ visuomotor Jacobian Field - 视觉-运动雅可比场，体现了视觉的点和
 linearity and spatial locality inductive biases - 线性归纳偏置和时间局部归纳偏置
 
 unseen robot configuration - 未见机器人构型，configuration在这里不是配置的意思，而是构型的意思，指的是机器人的形态。未见机器人构型应该是训练中没有见到的样例，对 unseen robot configuration 的预测精度体现了模型的泛化能力。
+
+volume rendering 体渲染
+
+differentiable rendering 可微分渲染

@@ -1,0 +1,69 @@
+# Extreme Parkour with Legged Robots 
+
+Institutions: CMU(Carnegie Mellon University)，UZH(University of Zurich)
+
+Journal/Conference: ICRA(IEEE International Conference on Robotics and Automation)
+
+Hardware: Unitree A1, >= 10k USD, >= 80K RMB; low-cost? 
+
+## 特点 
+
+1. 端到端（End-to-End）
+
+2. 用的是“低成本机器人”（不精确的执行器和传感器）
+
+3. 感知仅用一个 "front-facing" 的深度相机
+
+4. 只用一个神经网络（single neural net policy） 
+
+## Challenges
+
+1. "low cost Unitree A1 Quadrupedal Robot"
+
+    1) imprecise acuation 
+
+        noisy and laggy action - "Even if the actuions were correct, executing them on laggy and noisy actuators will lead to catastrophic failure." 
+
+    2) imprecise sensing 
+
+        has artifacts, latency and jitter
+
+## Comparsion 
+
+1. Jumping over a wide gap 
+    
+    1) 之前的方法（classical approaches）。如果想要跨越很宽的沟槽，需要提前精确测量这个沟槽的参数信息，然后求出一个最优动作。但如果障碍的路线或者跑酷（parkour）的路线变了的话，这些方法就不可行了（not feasible）
+
+    2) 使用类似人类学习 parkour 的方法。从实例中学习。不同的人类使用同样不精确的传感器和不精确的执行器，从不断的试错中来学习跑酷。**（对这一点保持怀疑）**
+
+    3) 总结，之前的方法泛化性不够好
+
+## 问题（关于 Benchmark, standard 等）
+
+1. 论文强调用 "imprecise actuation" 去执行 "precise athletic behaviors"，这里涉及到关于 `precise` 的定义的问题，什么样的执行器是精确的，什么样的运动又是精确的。
+
+2. 论文强调机器人能跳过 `2倍` 于自身长度或高度的障碍物，这个是机动性能的问题还是控制能力的问题？文中含糊不清。
+
+
+
+
+
+## Words 
+
+torque - 扭矩，转矩，T
+
+razor thin - 极小的，刀片般薄的
+
+manoeuvre - a **movement** performed with care and skill
+
+amazing feats - 令人惊叹的动作
+
+in-the-wild setting - 在真实自然环境中
+
+line of words - 系列工作
+
+throw off -  干扰
+
+conceptual challenge - 概念上的挑战
+
+
