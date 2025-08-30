@@ -8,13 +8,37 @@ Hardware: Unitree A1, >= 10k USD, >= 80K RMB; low-cost?
 
 ## 特点 
 
-1. 端到端（End-to-End）
+1. 端到端（End-to-End），end-to-ednd data-driven reinforement learning framework
 
 2. 用的是“低成本机器人”（不精确的执行器和传感器）
 
 3. 感知仅用一个 "front-facing" 的深度相机
 
 4. 只用一个神经网络（single neural net policy） 
+
+## 技术点
+
+### 1. End-to-End
+
+1. End-to-End Date-driven RL framework
+
+    input: pixels (depth camera)
+
+    output: motor commands
+
+2. Dual Distillation method
+
+    Phase 1 : trained with privileged heading
+
+    Phase 2 : distilled to predict its own heading direction 
+
+3. Universal Reward Design Principle Based on Inner-products(点积/点乘)
+
+## Benchmark
+
+1. compare with other works
+![img1](./resources/image.png)
+
 
 ## Challenges
 
@@ -65,5 +89,9 @@ line of words - 系列工作
 throw off -  干扰
 
 conceptual challenge - 概念上的挑战
+
+agile - adj. able to move quickly and easily 
+
+inner-product - 内积/点积
 
 
