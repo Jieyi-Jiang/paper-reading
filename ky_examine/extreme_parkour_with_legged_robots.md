@@ -6,6 +6,15 @@ Journal/Conference: ICRA(IEEE International Conference on Robotics and Automatio
 
 Hardware: Unitree A1, >= 10k USD, >= 80K RMB; low-cost? 
 
+Computing resources: RTX 3090 (may be? get it from these github readme)
+
+
+## 震撼
+
+1. 这个领域发展太快了，2024年见刊的论文，看起来已经非常陈旧了，太卷了太卷了
+
+
+
 ## 特点 
 
 1. 端到端（End-to-End），end-to-ednd data-driven reinforement learning framework
@@ -32,13 +41,15 @@ Hardware: Unitree A1, >= 10k USD, >= 80K RMB; low-cost?
 
     Phase 2 : distilled to predict its own heading direction 
 
+    ![alt text](./resources/tr_overview.png)
+
 3. Universal Reward Design Principle Based on Inner-products(点积/点乘)
 
 ## Benchmark
 
 1. compare with other works
 
-    ![img1](./resources/image.png)
+    ![img1](./resources/benchmark.png)
 
 
 ## Challenges
@@ -94,5 +105,13 @@ conceptual challenge - 概念上的挑战
 agile - adj. able to move quickly and easily 
 
 inner-product - 内积/点积
+
+paradigm - 范式，范例，样式
+
+privileged heading - 特权航向信息/上帝视角航向信息
+
+privileged visual information - 特权视觉信息/上帝视角视觉信息
+
+privileged - 表示这种信息在训练时可用，但在实际测试或部署时不可用，可以理解为上帝视角tilted ramps - 倾斜的斜坡
 
 
