@@ -27,13 +27,11 @@ Computing resources: RTX 3090 (may be? get it from these github readme)
 
 ## 技术点
 
-### 1. End-to-End
-
 1. End-to-End Date-driven RL framework
 
-    input: pixels (depth camera)
+    input: pixels (depth camera, raw depth and onboard sensing)
 
-    output: motor commands
+    output: motor commands (joint angle commands)
 
 2. Dual Distillation method
 
@@ -45,6 +43,25 @@ Computing resources: RTX 3090 (may be? get it from these github readme)
 
 3. Universal Reward Design Principle Based on Inner-products(点积/点乘)
 
+    > III. METHOD ->  A. Unified Reward for Extreme Parkour
+    1. Direction 
+
+        $$ 
+        \hat{\mathbf{d}}_w = 
+        \cfrac{\mathbf{p} - \mathbf{x}}
+        {\| \mathbf{p} - \mathbf{x} \|} 
+        $$
+
+    2. Velocity Tracking Reward 
+
+        $$
+        r_{tracking} = \min( \left<  \mathbf{v}, \mathbf{\hat{d}}_w \right>, v_{cmd})
+        $$
+
+4. ROA - Regularized Online Adaptation 
+
+
+
 ## Benchmark
 
 1. compare with other works
@@ -52,7 +69,7 @@ Computing resources: RTX 3090 (may be? get it from these github readme)
     ![img1](./resources/benchmark.png)
 
 
-## Challenges
+## Challenges and Solutions 
 
 1. "low cost Unitree A1 Quadrupedal Robot"
 
@@ -63,6 +80,16 @@ Computing resources: RTX 3090 (may be? get it from these github readme)
     2) imprecise sensing 
 
         has artifacts, latency and jitter
+
+2. "Since parkour requires diverse behaviors to traverse different obstacles it is challenging to engineer reward functions specific to each"
+
+    1) present a simple, unified reward formulation from which diverse behaviors emerge automatically
+
+3. "during parkour the robot needs to be able to choose its own direction as opposed to following human-specific ones"
+
+    1) Phase 1 - using suitably placed waypoints to provide directions 
+
+    2) Phase 2 - train a network to predict these oracle heading directions from **depth information** 
 
 ## Comparsion 
 
