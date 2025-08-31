@@ -58,6 +58,19 @@ Computing resources: RTX 3090 (may be? get it from these github readme)
         r_{tracking} = \min( \left<  \mathbf{v}, \mathbf{\hat{d}}_w \right>, v_{cmd})
         $$
 
+    3. Penalize foot contacts near terrain edges
+
+        $$
+            r_{clearance} = - \sum_{i=0}^{4} c_i \cdot M[p_i] 
+        $$
+
+    4. Track the desired forward vector (stylized)
+
+        $$
+        r_{stylized} = W \cdot [0.5 \cdot \langle \hat{\mathbf{v}_{fwd}}, \hat{\mathbf{c}} \rangle + 0.5 ] ^ 2
+        $$
+
+
 4. ROA - Regularized Online Adaptation 
 
 
@@ -141,4 +154,8 @@ privileged visual information - 特权视觉信息/上帝视角视觉信息
 
 privileged - 表示这种信息在训练时可用，但在实际测试或部署时不可用，可以理解为上帝视角tilted ramps - 倾斜的斜坡
 
+penalize - 使受惩罚，v. to punish sb for breaking a rule or law by making them suffer a disadvantage
 
+defining feature - 决定性特征
+
+aesthetically pleasing - 美观的，赏心悦目的
