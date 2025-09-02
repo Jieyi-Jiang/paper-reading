@@ -2,7 +2,7 @@
 
 Institutions: CMU(Carnegie Mellon University)，UZH(University of Zurich)
 
-Journal/Conference: ICRA(IEEE International Conference on Robotics and Automation)
+Journal/Conference: ICRA 2024 (2024 IEEE International Conference on Robotics and Automation)
 
 Hardware: Unitree A1, >= 10k USD, >= 80K RMB; low-cost? 
 
@@ -33,18 +33,10 @@ Computing resources: RTX 3090 (may be? get it from these github readme)
 
     output: motor commands (joint angle commands)
 
-2. Dual Distillation method
-
-    Phase 1 : trained with privileged heading
-
-    Phase 2 : distilled to predict its own heading direction 
-
-    ![alt text](./resources/tr_overview.png)
-
-3. Universal Reward Design Principle Based on Inner-products(点积/点乘)
+2. Universal Reward Design Principle Based on Inner-products(点积/点乘)
 
     > III. METHOD ->  A. Unified Reward for Extreme Parkour
-    1. Direction 
+    1) Direction 
 
         $$ 
         \hat{\mathbf{d}}_w = 
@@ -52,28 +44,61 @@ Computing resources: RTX 3090 (may be? get it from these github readme)
         {\| \mathbf{p} - \mathbf{x} \|} 
         $$
 
-    2. Velocity Tracking Reward 
+    2) Velocity Tracking Reward 
 
         $$
         r_{tracking} = \min( \left<  \mathbf{v}, \mathbf{\hat{d}}_w \right>, v_{cmd})
         $$
 
-    3. Penalize foot contacts near terrain edges
+    3) Penalize foot contacts near terrain edges
 
         $$
             r_{clearance} = - \sum_{i=0}^{4} c_i \cdot M[p_i] 
         $$
 
-    4. Track the desired forward vector (stylized)
+    4) Track the desired forward vector (stylized, handstand)
 
         $$
         r_{stylized} = W \cdot [0.5 \cdot \langle \hat{\mathbf{v}_{fwd}}, \hat{\mathbf{c}} \rangle + 0.5 ] ^ 2
         $$
 
+3. Dual Distillation method
+
+    1) Phase 1 : trained with privileged heading
+        
+        > III. METHOD -> B. Reinforcement Learning from Scandots (Phase 1)
+
+        - input: 
+
+            > (1) proprioception: $ \mathbf{x} $
+            > 
+            > (2) scandots: $ \mathbf{m} $
+            > 
+            > (3) target heading: $ \mathbf{\hat{d}} $
+            > 
+            > (4) walking flag: $ W $ 
+            > 
+            > (5) commanded speed: $ v_{cmd} $
+        
+        - Use regularized online adaptation (ROA)to train an adaptation module toestimate environment properties.
+
+        - increasing difficulty 
+
+    2) Phase 2 : distilled to predict its own heading direction
+
+        > III. METHOD -> C. Distilling Direction and Exteroception (Phase 2)
+
+        - From simulation to real robots
+
+            1. scandots -> depth camera
+
+            2. specify waypoints and target directions -> (x) unavailable
 
 4. ROA - Regularized Online Adaptation 
 
+- Training Overview
 
+    ![alt text](./resources/tr_overview.png)
 
 ## Benchmark
 
@@ -159,3 +184,15 @@ penalize - 使受惩罚，v. to punish sb for breaking a rule or law by making t
 defining feature - 决定性特征
 
 aesthetically pleasing - 美观的，赏心悦目的
+
+proprioception - 本体感受器
+
+dead pixels - 坏点，指不正常的像素
+
+artifacts, latency and jitter - 失真，延迟和抖动
+
+emergent results, emergent behaviors - 指研究中意外出现的、非预设的实验结果或行为。此处特指通过简单奖励函数训练后，机器人自发产生的、超越研究者预期或传统规则定义的行为模式。
+
+
+
+
