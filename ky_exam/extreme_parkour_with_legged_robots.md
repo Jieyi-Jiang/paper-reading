@@ -193,6 +193,20 @@ artifacts, latency and jitter - 失真，延迟和抖动
 
 emergent results, emergent behaviors - 指研究中意外出现的、非预设的实验结果或行为。此处特指通过简单奖励函数训练后，机器人自发产生的、超越研究者预期或传统规则定义的行为模式。
 
+propel - v. to move, drive or push sth forward or in a particular direction推动；驱动；推进
+
+Mean X-Displacement (MXD) - X轴方向上的平均位移
+    
+    (1) 在足式机器人（如四足机器狗）运动中，MXD用于衡量机器人向前行进（X方向）的平均稳定性或效率。
+
+    (2) 例如：在跨越障碍物时，若机器人频繁左右晃动或后退，其MXD值会较低；若持续稳定前进，则MXD值较高​
+
+Mean Edge Violation (MEV) - 平均边缘违反
+
+    (1) 指机器人在运动过程中超出允许边界的行为​（如越出指定路径边界、触碰禁止区域或偏离安全范围）。
+
+    (2) 例如：足式机器人在狭窄通道行走时，若脚部踩到边界外（如踩空或碰撞障碍物），即发生一次"边缘违反"。
+
 
 
 
