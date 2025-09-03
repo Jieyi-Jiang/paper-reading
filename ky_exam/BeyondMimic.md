@@ -31,6 +31,10 @@
 
 2. Guided diffusion policy
 
+3. Figure
+
+![BeyondMimic-overview](./resources/BeyondMimic-overview.png)
+
 ### Technical Points 
 
 1. Reinforcement Learning 
