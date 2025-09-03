@@ -13,6 +13,12 @@
 
 5. Goal: Reproducing a given reference motion on robot hardware with high quality in global coordinates.
 
+## Inspiration
+
+1. manifold - 用流形来理解动作的学习。模型的训练理解为生成一个流形，每个动作都是这个流形上的一条曲线，动作的切换就在曲线的交汇处。
+
+    - 李群李代数在这里能不能起作用？
+
 ## Chanllenges
 
 1. Gap Between Simulation and Real-World
@@ -162,6 +168,82 @@ apply three domain randominzation terms:
 
 3. the torso's centre of mass position 
 
+## Trajectory Synthesis via Guided Defussion
+
+### 1. Training
+
+1. employ Diffuse-CLoC to create a state-action co-difussion framework
+
+2. standard denoising diffusion process
+
+3. minimizing the MSE(Mean Squared Error) 
+
+### 2. Guidance
+
+> 重点关注这一节里面的数学原理
+
+goal:
+
+- to direct the model toward specific objectvies during inference, drives the sampling process toward lower-cost regions of the trajectory space
+
+method:
+
+1. classifer guidance
+
+2. Bayes' theorem 
+
+3. cost function 
+
+three representative task to demonstrate highly versatility of the framework, each defined by different types of trajectory constraints:
+
+1. joystick steering
+
+2. waypoint navigation 
+
+3. obstacle avoidance
+
+### 3. Downstream Tasks
+
+#### (1) joystick steering 
+
+cost function: 
+$$ G_{\tau}^{c}(\tau) = \frac{1}{2} \sum_{t'=t}^{t+H} \left\| V_{xy,t'}(\tau_{t'}) - g_{v} \right\|^{2} 
+$$ 
+1. squared difference between the state prediction velocity and the joystick input velocity 
+
+#### (2) waypoint navigation 
+
+representative: 
+
+$$ 
+G_{\boldsymbol{\tau}}^{\mathrm{ts}}(\boldsymbol{\tau}) = \sum_{t^{\prime}=t}^{t+H} \left(1 - e^{-2d}\right) \left\| P_{x}(\boldsymbol{s}_{t^{\prime}}) - g_{p} \right\|^{2} + e^{-2d} \left\| V_{x, t^{\prime}}(\boldsymbol{\tau}_{t^{\prime}}) \right\|^{2} 
+$$
+
+1. cost function rewards proximity to the target
+
+2. increasingly penalizing velocity as the agent gets closer (接近目标点时，对速度的惩罚增加，速度越大，惩罚越大，以达到停止运动的目的)
+
+#### (3) obstacle avoidance
+
+build a Signed Distance Field(SDF, 带符号的距离场) to obtain the distance and gradient between body positions and the nearest object
+
+cost function:
+
+$$ 
+G_{\boldsymbol{\tau}}^{c}(\boldsymbol{\tau}) = \sum_{t^{\prime}=t}^{t+H} \sum_{b \in \mathcal{B}_{\mathrm{c}}} B\left( \operatorname{SDF}\left( \mathbf{P}_{b, t^{\prime}}(\boldsymbol{\tau}) \right) - r_i, \delta \right) 
+$$
+
+## Ecperiments and Resutls
+
+## Discussion and Future Work
+
+### 猛猛夸自己的成果
+
+### 待解决的问题
+
+state estimation drift - 状态预测偏移
+
+
 ## Words
 
 overfit - 过拟合
@@ -201,3 +283,32 @@ heuristic - 启发，teaching or education encourages you to learn by discoverin
 uniformly weighted - 均匀加权；指在优化目标、损失函数或评估指标中，对所有组件或误差项赋予相同的权重，而非根据重要性差异化处理。
 
 perturbation - 扰动，a small change in the quality, behaviour or movement of sth
+
+physically-grounded - 物理可行的，指算法生成的结果（如机器人动作、运动轨迹）符合物理世界的规律和约束
+
+Bayes' theorem - 贝叶斯定理，条件概率：$ P(A|B) = \cfrac{P(B|A)P(A)}{P(B)} $
+
+conditional distribution - 条件分布
+
+unconditional score - 无条件分数
+
+decompose - 分解，解构
+
+conditional likelihood - 条件似然
+
+proximity - n.（时间、空间、关系的）靠近，亲近
+
+inert - adj. 惰性的，迟缓的 without power to move or act,without active chemical or other properties
+
+gantry - 龙门架
+
+erratic - adj. 不稳定的，难以预测的 unpredictable; not happening at regular times; not following any plan or regular pattern; that you cannot rely on
+
+erratic or unstable behavior - 难以预测和不稳定的行为
+
+transitioning between distinct skills - 在不同的技能之间过渡/转移（扩散模型逐帧生成，缺乏时序性）
+
+conceptualize - v. 构思；使形成观念；将…概念化（为…）to form an idea of sth in your mind 
+
+manifold - 流形
+
