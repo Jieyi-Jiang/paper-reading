@@ -20,6 +20,10 @@
 
     - Unstructured Terrain
 
+## 想法
+
+有点盲人摸象的感觉，机器人的实际效果是否高度依赖于内部传感器的精度有待考证。大可不必去掉所有外部传感器而仅仅留下内部传感器作为参考量。这个网络可以作为激光雷达、相机等外部传感器损坏掉之后的备用网络，以调高系统整体上的可靠性。
+
 ## Introduction 
 
 Legged robots：
@@ -145,7 +149,7 @@ proximal policy optimization (PPO, 近端策略优化) algorithm：
 
     stablity rewards - produce a stable and natural locomotion behavior 
 
-    **印象深刻：居然可以使用强化学习去优化电机功率来减少发热以提高机器人运动距离。韩国人有点东西。**
+    **印象深刻：居然可以使用强化学习去优化电机功率来减少发热以提高机器人运动距离。强化学习有点牛逼。其实不然，本质上还是 reward function 在起作用，强化学习就是把函数的权重给生成了出来**
     
 5. Curriculum Learning
     
@@ -163,6 +167,18 @@ proximal policy optimization (PPO, 近端策略优化) algorithm：
 
 
 ### C. Context-Aided Estimator Network 
+
+Prior works - 仅仅预测 $\mathbf{z}_t$ 
+
+我很牛逼 - 连 $\mathbf{v}_t$ 都预测出来了，不仅如此，我们更进一步，连周围的环境（环境地图）都预测出来了
+
+我们的效果 - significantly improves body state estimation accuracy 
+
+the advantages of proposed CENet:
+
+1. the network architecture is **significantly simplified** and runs synchronously during inference owing to the **shared encoder architecture** 
+
+2. the encoder network can jointly learn the robot’s forward and backward dynamics via the auto-encoding mechanism, hence, increasing its accuracy.
 
 ## Experiments 
 
@@ -219,3 +235,12 @@ interplay - n./v. 相互影响，相互作用
 zero-shot sim-to-real - 零样本仿真-现实迁移；指在无需现实世界数据重新训练或微调的情况下，将仿真环境中训练的策略直接部署到物理机器人上并能正常工作。
 
 inclination - 斜坡
+
+bootstrapping - 自举法。自举法指在强化学习中，​使用当前价值函数的估计值来更新同一价值函数的技术。**（搞不懂）**
+
+coeffificient of variation (CV) - 变异系数，变动系数，标准差与均值的比值，用于衡量数据的相对离散程度
+
+i.e. - 即，也就是（id est），拉丁语
+
+hyperbolic tangent - 双曲正切函数
+
