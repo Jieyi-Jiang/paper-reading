@@ -2,7 +2,11 @@
 
 ## 基础信息
 
-1. Con
+1. Conference: ICRA 2025 (2025 IEEE International Conference on Robotics and Automation)
+
+2. institute: Google DeepMind 
+
+
 
 ## 想法
 
